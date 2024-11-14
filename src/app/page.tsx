@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 
-const PALAVRAS = ['TERMO', 'TESTE', 'FURIA', 'REACT', 'PIZZA']
+const PALAVRAS = ['TERMO', 'TESTE', 'JOGO', 'REACT', 'PIZZA']
 
 export default function TermoGame() {
   const [palavraSecreta] = useState(() => PALAVRAS[Math.floor(Math.random() * PALAVRAS.length)])
@@ -101,7 +101,7 @@ export default function TermoGame() {
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [handleKeyPress])
 
-  const getLetraStatus = (letra: string, index: number, tentativa: string) => {
+  const getLetraStatus = (letra: string, index: number) => {
     if (palavraSecreta[index] === letra) {
       return 'bg-green-500'
     } else if (palavraSecreta.includes(letra)) {
@@ -116,7 +116,7 @@ export default function TermoGame() {
       const row = []
       for (let j = 0; j < 5; j++) {
         const letra = tentativas[i]?.[j] || (i === tentativas.length ? tentativaAtual[j] : '')
-        const status = tentativas[i] ? getLetraStatus(letra, j, tentativas[i]) : 'border-neutral-600'
+        const status = tentativas[i] ? getLetraStatus(letra, j) : 'border-neutral-600'
         row.push(
           <div
             key={`${i}-${j}`}
